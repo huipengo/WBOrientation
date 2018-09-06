@@ -1,0 +1,6 @@
+framework module Pods_WBOrientation_Example {
+  umbrella header "Pods-WBOrientation_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

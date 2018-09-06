@@ -1,0 +1,6 @@
+framework module WBOrientation {
+  umbrella header "WBOrientation-umbrella.h"
+
+  export *
+  module * { export * }
+}

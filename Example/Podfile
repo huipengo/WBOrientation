@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/specs.git'
+
+platform :ios, '8.0'
+inhibit_all_warnings!
+use_frameworks!
+
+target 'WBOrientation_Example' do
+  pod 'WBOrientation', :path => '../'
+
+  target 'WBOrientation_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

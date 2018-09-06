@@ -1,0 +1,16 @@
+PODS:
+  - WBOrientation (0.1.0)
+
+DEPENDENCIES:
+  - WBOrientation (from `../`)
+
+EXTERNAL SOURCES:
+  WBOrientation:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  WBOrientation: bad15c2573fb310449c2e49a50de7d4f7c0e8187
+
+PODFILE CHECKSUM: 02253a60342de3c051a47e623cbf882381f5a6cb
+
+COCOAPODS: 1.5.3
