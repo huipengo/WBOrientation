@@ -8,6 +8,6 @@
 
 #import "WBBaseViewController.h"
 
-@interface WBAutorotateViewController : WBBaseViewController
+@interface WBAutorotateViewController : UIViewController
 
 @end

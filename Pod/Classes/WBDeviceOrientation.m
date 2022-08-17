@@ -76,19 +76,59 @@
 }
 
 /// 强制转屏
-+ (void)interfaceOrientation:(UIInterfaceOrientation)orientation
++ (void)interfaceOrientation:(UIInterfaceOrientation)orientation viewController:(UIViewController *)viewController
 {
+    if (@available(iOS 16.0, *)) {
+        UINavigationController *nav = viewController.navigationController;
+        SEL selUpdateSupportedMethod = NSSelectorFromString(@"setNeedsUpdateOfSupportedInterfaceOrientations");
+        if ([nav respondsToSelector:selUpdateSupportedMethod]) {
+            (((void (*)(id, SEL))[nav methodForSelector:selUpdateSupportedMethod])(nav, selUpdateSupportedMethod));
+        }
+        
+        /// 以下代码可注释或不注释都行
+//        NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+//        UIWindowScene *ws = (UIWindowScene *)array.firstObject;
+//        Class GeometryPreferences = NSClassFromString(@"UIWindowSceneGeometryPreferencesIOS");
+//        id geometryPreferences = [[GeometryPreferences alloc] init];
+//        [geometryPreferences setValue:@([self interfaceOrientationMask:orientation]) forKey:@"interfaceOrientations"];
+//        SEL selGeometryUpdateMethod = NSSelectorFromString(@"requestGeometryUpdateWithPreferences:errorHandler:");
+//        void (^ErrorBlock)(NSError *error) = ^(NSError *error){
+//              NSLog(@"iOS 16 转屏Error: %@",error);
+//        };
+//        if ([ws respondsToSelector:selGeometryUpdateMethod]) {
+//            (((void (*)(id, SEL,id,id))[ws methodForSelector:selGeometryUpdateMethod])(ws, selGeometryUpdateMethod,geometryPreferences,ErrorBlock));
+//        }
+//
+//        return;
+    }
+    
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector  = NSSelectorFromString(@"setOrientation:");
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
         [invocation setSelector:selector];
         [invocation setTarget:[UIDevice currentDevice]];
-        int val = orientation;
-        // 从2开始是因为0 1 两个参数已经被selector和target占用
+        int val = (int)orientation;
+        // 从 2 开始是因为 0 1 两个参数已经被 selector 和 target 占用
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
 }
+
++ (UIInterfaceOrientationMask)interfaceOrientationMask:(UIInterfaceOrientation)orientation {
+    if (orientation == UIInterfaceOrientationLandscapeLeft) {
+        return UIInterfaceOrientationMaskLandscapeLeft;
+    }
+    else if (orientation == UIInterfaceOrientationLandscapeRight) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    }
+    else if (orientation == UIInterfaceOrientationPortrait) {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
 
 /// 强制设备旋转到某个方向
 + (void)forceToDeviceOrientation:(UIDeviceOrientation)orientation

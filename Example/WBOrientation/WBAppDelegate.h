@@ -10,7 +10,10 @@
 
 @interface WBAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow * _Nullable window;
+
+//@property (nonatomic, assign) UIInterfaceOrientationMask orientation;
+@property (nonatomic, assign) UIInterfaceOrientation orientation;
 
 + (WBAppDelegate * _Nonnull)appDelegate;
 

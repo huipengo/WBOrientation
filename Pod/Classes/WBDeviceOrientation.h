@@ -22,7 +22,7 @@
 + (UIInterfaceOrientation)statusBarOrientation;
 
 /// 强制转屏
-+ (void)interfaceOrientation:(UIInterfaceOrientation)orientation;
++ (void)interfaceOrientation:(UIInterfaceOrientation)orientation viewController:(UIViewController *)viewController;
 
 
 /**
